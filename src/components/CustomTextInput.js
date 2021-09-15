@@ -29,7 +29,7 @@ const _onFocus=()=> {
      onFocus={_onFocus}
       
       />
-      {showPassword ? 
+      {showPassword && String(value).length>0? 
           <TouchableOpacity onPress={() => { showHidePassword() }} >
                     <Image source={secureTextEntry ?  Images.view_password:Images.ic_notView_password } style={{ marginHorizontal: 15 }} />
           </TouchableOpacity> : null

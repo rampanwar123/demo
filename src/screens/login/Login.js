@@ -1,5 +1,5 @@
 import React ,{useState}from 'react';
-import {View,Text,StyleSheet,TouchableOpacity,Alert} from 'react-native';
+import {View,Text,StyleSheet,TouchableOpacity,Alert,StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Size from "../../common/Fonts";
@@ -17,6 +17,19 @@ const [state,setState] = useState({
     password:''
 })
 
+//  //android back button handler.
+//  useBackButton(backButtonHandler);
+
+//  //backButtonHandler.
+//  function backButtonHandler() {
+//      showOptionAlert('Do you want to quit the app?', quitAppCallback);
+//      return true;
+//  }
+
+//  const quitAppCallback = () => {
+//      BackHandler.exitApp();
+//  };
+
 const _inputChange = (key, value) => {
   if(key==='email'){
     if((Constants.EMAIL_REGEX).test(value)){
@@ -32,7 +45,7 @@ const _inputChange = (key, value) => {
 }
 
 const _handleLogin = ()=>{
-    console.log('Login')
+    navigation.navigate('Home')
   };
 
 const showHidePassword =() =>{
@@ -41,8 +54,9 @@ const showHidePassword =() =>{
 
 return(
     <View style={style.container} >
+       <StatusBar backgroundColor='blue' />
         <Text style={style.loginText}>Welcome Back </Text>
-        <Text style={{alignSelf:'center',marginBottom:50}}>Sign to continue </Text>
+        <Text style={{alignSelf:'center',marginBottom:30}}>Sign to continue </Text>
 
         <View style={style.TextInputView}>
         <CustomTextInput
@@ -53,7 +67,7 @@ return(
            fieldId='email'
         />
         </View>
-        {!emailValidation&&state.email.length>0?<Text style={{marginHorizontal:20,color:'red',fontSize:12}}>Invalid Email</Text>:null}
+        {!emailValidation&&state.email.length>0?<Text style={{marginHorizontal:20,color:'red',fontSize:10,lineHeight:10}}>please enter valid email</Text>:null}
 
         <View style={style.TextInputView}>
         <CustomTextInput

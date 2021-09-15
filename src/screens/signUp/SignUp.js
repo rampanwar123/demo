@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {View,Text,StyleSheet,TouchableOpacity, Image} from 'react-native';
+import {View,Text,StyleSheet,TouchableOpacity, Image,StatusBar,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Size from "../../common/Fonts";
@@ -7,6 +7,8 @@ import CustomTextInput from "../../components/CustomTextInput";
 import CustomButton from "../../components/CustomButton";
 import Constants from "../../common/Constants";
 import Images from "../../common/Images";
+import useBackButton from "../../common/BackButtonHandler";
+import { showOptionAlert } from "../../common/ShowAlert";
 
 const SignUp = () =>{
 const navigation = useNavigation();
@@ -21,6 +23,18 @@ const [state,setState] = useState({
     password:'',
     confirmPassword:''
 })
+
+// useBackButton(backButtonHandler);
+
+//  //backButtonHandler.
+//  function backButtonHandler() {
+//      showOptionAlert('Do you want to quit the app?', quitAppCallback);
+//      return true;
+//  }
+
+//  const quitAppCallback = () => {
+//      BackHandler.exitApp();
+//  };
 
 const _inputChange = (key, value) =>{
   if(key === 'email')
@@ -50,7 +64,7 @@ if(key=== 'confirmPassword'){
 }
 
 const _handleSignUp = ()=>{
-    console.log('Sign up')
+    navigation.navigate('Login')
 
 }
 
@@ -70,10 +84,10 @@ const showHidePassword =() =>{
 
 return(
     <View style={style.container}>
-      
+      <StatusBar backgroundColor='blue' />
 
         <Text style={style.signUpText}>Create Account</Text>
-        <Text style={{alignSelf:'center',marginBottom:50}}>create a new account </Text>
+        <Text style={{alignSelf:'center',marginBottom:30}}>create a new account </Text>
 
       <View style={style.TextInputView}>
         <CustomTextInput
@@ -96,7 +110,7 @@ return(
        
         />
       </View>
-      {mobileValidation&&state.mobile.length>0?<Text style={{paddingLeft:10,color:'red'}}>Invalid number</Text>:null}
+      {mobileValidation&&state.mobile.length>0?<Text style={style.inValidTextStyle}>please enter valid mobile number</Text>:null}
       
       <View style={style.TextInputView}>
         <CustomTextInput
@@ -107,7 +121,7 @@ return(
            fieldId='email'
         />
       </View>
-      {emailValidation && state.email.length > 0?<Text style={{paddingLeft:10,color:'red'}}>Invalid Email</Text>:null}
+      {emailValidation && state.email.length > 0?<Text style={style.inValidTextStyle}>please enter valid email</Text>:null}
       <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Password'}
@@ -132,7 +146,7 @@ return(
            showHidePassword={showHidePassword}
         />
       </View>
-      {passwordMatch?<Text style={{paddingLeft:10,color:'red'}}>paasword not match</Text>:null}
+      {passwordMatch?<Text style={style.inValidTextStyle}>paasword not match</Text>:null}
 
       <CustomButton
          text={'SIGN UP'}
@@ -183,6 +197,12 @@ const style = StyleSheet.create({
     },
     loginText:{
         color:'blue'
+    },
+    inValidTextStyle:{
+      fontSize:10,
+      lineHeight:10,
+      paddingLeft:20,
+      color:'red'
     }
 })
 
