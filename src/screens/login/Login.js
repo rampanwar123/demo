@@ -10,7 +10,8 @@ import Constants from "../../common/Constants";
 const Login = () =>{
 const navigation = useNavigation();
 
-const[MValidation,setMValidation] =useState(false)
+const[emailValidation,setEmailValidation] =useState(false)
+const [secureTextEntry,setSecureTextEntry] = useState(true)
 const [state,setState] = useState({
     email:'',
     password:''
@@ -19,9 +20,9 @@ const [state,setState] = useState({
 const _inputChange = (key, value) => {
   if(key==='email'){
     if((Constants.EMAIL_REGEX).test(value)){
-      setMValidation(false)
+      setEmailValidation(true)
     }else{
-      setMValidation(true)
+      setEmailValidation(false)
     }
   }
    setState({
@@ -31,12 +32,17 @@ const _inputChange = (key, value) => {
 }
 
 const _handleLogin = ()=>{
-    Alert.alert('Login')
+    console.log('Login')
   };
+
+const showHidePassword =() =>{
+ setSecureTextEntry(!secureTextEntry)
+}
 
 return(
     <View style={style.container} >
-        <Text style={style.loginText}>Login </Text>
+        <Text style={style.loginText}>Welcome Back </Text>
+        <Text style={{alignSelf:'center',marginBottom:50}}>Sign to continue </Text>
 
         <View style={style.TextInputView}>
         <CustomTextInput
@@ -47,18 +53,20 @@ return(
            fieldId='email'
         />
         </View>
-        {MValidation?<Text style={{paddingLeft:10,color:'red'}}>Invalid Email</Text>:null}
+        {!emailValidation&&state.email.length>0?<Text style={{marginHorizontal:20,color:'red',fontSize:12}}>Invalid Email</Text>:null}
 
         <View style={style.TextInputView}>
-          <CustomTextInput
+        <CustomTextInput
            placeholder={'Password'}
            textInputStyle={style.textInputStyle}
            value={state.password}
            onChangeTextPress={_inputChange}
            fieldId='password'
-           secureTextEntry={true}
+           secureTextEntry={secureTextEntry}
+           showPassword={true}
+           showHidePassword={showHidePassword}
         />
-        </View>
+       </View>
 
           <TouchableOpacity style={{alignItems:'flex-end'}}>
              <Text style={style.forgotText}>Forgot Password?</Text>
@@ -67,17 +75,17 @@ return(
         <CustomButton
          text={'LOGIN'}
          alignSelf={'center'}
-         width={'95%'}
+         width={'90%'}
          height={50}
          backgroundColor='blue'
-         borderRadius={3}
+         borderRadius={5}
          top={25}
          onPress={() => _handleLogin()}
         />
 
       <View style={style.newAcount}>
         <TouchableOpacity onPress={() =>navigation.navigate('SignUp') }>
-          <Text >Don't have an account? <Text style={style.signUpText}>SIGNUP </Text></Text>
+          <Text >Don't have an account? <Text style={style.signUpText}>create a new account </Text></Text>
         </TouchableOpacity>
       </View>
 
@@ -92,36 +100,32 @@ const style =StyleSheet.create({
         backgroundColor:'white'
     },
   loginText:{
-        alignSelf:'flex-start',
-        marginTop:100,
-        marginBottom:20,
-        marginLeft:10,
-        fontSize:Size.Size.FONT_SIZE_30,
+        alignSelf:'center',
+        marginTop:150,
+        fontSize:32,
         fontWeight:'bold',
         color:'blue'
     },
     textInputStyle:{
-        marginVertical:10,
-        borderWidth:1,
-        borderColor:'black',
-        paddingLeft: 20,
-        fontSize: 14,
-        textAlign: 'left',
-        borderRadius:3
+    flex:1,
+    flexDirection:'row',
+    paddingLeft:10
+    
+    
     },
     TextInputView:{
-        marginTop:20,
-        marginHorizontal:10
+      marginHorizontal:20,
+      marginVertical:10
     },
     forgotText:{
        color:'blue',
-       padding:10
+       marginRight:20,
+       marginVertical:5
     },
     newAcount:{
-        alignSelf: 'center', flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 20
-    
+      flex: 1,
+      alignSelf: 'center',
+      marginVertical:30
     },
     signUpText:{
         color:'blue'

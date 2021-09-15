@@ -1,19 +1,19 @@
 import React,{useState} from 'react';
-import {View,Text,StyleSheet,TouchableOpacity, Alert} from 'react-native';
+import {View,Text,StyleSheet,TouchableOpacity, Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Size from "../../common/Fonts";
 import CustomTextInput from "../../components/CustomTextInput";
 import CustomButton from "../../components/CustomButton";
 import Constants from "../../common/Constants";
-import { color } from 'react-native-reanimated';
+import Images from "../../common/Images";
 
 const SignUp = () =>{
 const navigation = useNavigation();
 const[emailValidation,setEmailValidation] =useState(false)
 const[mobileValidation,setMobileValidation] =useState(false)
 const [passwordMatch,setPasswordMatch] =useState(false)
-
+const [secureTextEntry,setSecureTextEntry] = useState(true)
 const [state,setState] = useState({
     name:'',
     email:'',
@@ -50,11 +50,10 @@ if(key=== 'confirmPassword'){
 }
 
 const _handleSignUp = ()=>{
-    Alert.alert('Sign up')
+    console.log('Sign up')
 
 }
 
-//  
 const _confirmPassword = ()=>{
 
   if(state.confirmPassword !== state.password)
@@ -65,11 +64,16 @@ const _confirmPassword = ()=>{
    }
 }
 
-console.log(state)
+const showHidePassword =() =>{
+  setSecureTextEntry(!secureTextEntry)
+ }
 
 return(
     <View style={style.container}>
-        <Text style={style.signUpText}>SignUp</Text>
+      
+
+        <Text style={style.signUpText}>Create Account</Text>
+        <Text style={{alignSelf:'center',marginBottom:50}}>create a new account </Text>
 
       <View style={style.TextInputView}>
         <CustomTextInput
@@ -89,9 +93,10 @@ return(
            onChangeTextPress={ _inputChange}
            fieldId='mobile'
            keyboardType='numeric'
+       
         />
       </View>
-      {mobileValidation?<Text style={{paddingLeft:10,color:'red'}}>Invalid number</Text>:null}
+      {mobileValidation&&state.mobile.length>0?<Text style={{paddingLeft:10,color:'red'}}>Invalid number</Text>:null}
       
       <View style={style.TextInputView}>
         <CustomTextInput
@@ -102,7 +107,7 @@ return(
            fieldId='email'
         />
       </View>
-      {emailValidation?<Text style={{paddingLeft:10,color:'red'}}>Invalid Email</Text>:null}
+      {emailValidation && state.email.length > 0?<Text style={{paddingLeft:10,color:'red'}}>Invalid Email</Text>:null}
       <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Password'}
@@ -110,7 +115,9 @@ return(
            value={state.password}
            onChangeTextPress={_inputChange}
            fieldId='password'
-           secureTextEntry={true}
+           secureTextEntry={secureTextEntry}
+           showPassword={true}
+           showHidePassword={showHidePassword}
         />
       </View>
       <View style={style.TextInputView}>
@@ -120,7 +127,9 @@ return(
            value={state.confirmPassword}
            onChangeTextPress={_inputChange}
            fieldId='confirmPassword'
-           secureTextEntry={true}
+           secureTextEntry={secureTextEntry}
+           showPassword={true}
+           showHidePassword={showHidePassword}
         />
       </View>
       {passwordMatch?<Text style={{paddingLeft:10,color:'red'}}>paasword not match</Text>:null}
@@ -128,16 +137,16 @@ return(
       <CustomButton
          text={'SIGN UP'}
          alignSelf={'center'}
-         width={'95%'}
+         width={'90%'}
          height={50}
          backgroundColor='blue'
-         borderRadius={3}
+         borderRadius={5}
          top={25}
          onPress={() => _handleSignUp()}
         />
        <View style={style.newAcount}>
         <TouchableOpacity onPress={() => navigation.navigate('Login') }>
-          <Text >Already have a account? <Text style={style.loginText}>LOGIN</Text> </Text>
+          <Text >Already have a account? <Text style={style.loginText}>Login</Text> </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -146,36 +155,30 @@ return(
 
 const style = StyleSheet.create({
     container:{
-        flex:1
+        flex:1,
+        backgroundColor:'white'
     },
     signUpText:{
-        alignSelf:'flex-start',
-        marginTop:50,
-        marginBottom:20,
-        marginLeft:15,
-        fontSize:Size.Size.FONT_SIZE_30,
+        alignSelf:'center',
+        marginTop:100,
+        fontSize:32,
         fontWeight:'bold',
         color:'blue'
     },
     textInputStyle:{
-        marginVertical:5,
-        borderWidth:1,
-        borderColor:'gray',
-        paddingLeft: 20,
-        fontSize: 14,
-        textAlign: 'left',
-        borderRadius:3,
-        color:'black'
+      flex:1,
+      flexDirection:'row',
+      paddingLeft:10
         
     },
     TextInputView:{
-        marginTop:20,
-        marginHorizontal:10
+      marginHorizontal:20,
+      marginVertical:5
     },
     newAcount:{
-        alignSelf: 'center', flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 20
+      flex: 1,
+      alignSelf: 'center',
+      marginVertical:30
     
     },
     loginText:{

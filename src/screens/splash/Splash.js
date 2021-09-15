@@ -9,7 +9,7 @@ const Splash = () =>{
 
     useEffect(() => {
         setTimeout(() => {
-        navigation.navigate('Login')
+        navigation.navigate('SignUp')
         }, 2000)
       }, []);
 
@@ -24,7 +24,8 @@ const style =StyleSheet.create({
     container:{
         flex:1,
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor:'white'
     },
     textStyle:{
        fontSize:Size.Size.FONT_SIZE_30,
