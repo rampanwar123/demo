@@ -3,7 +3,7 @@ import {View,Text,TextInput} from 'react-native'
 
 const CustomTextInput = (props) =>{
 
-const{ placeholder,value,onChangeTextPress,keyboardType,textInputStyle,fieldId}=props
+const{ placeholder,value,onChangeTextPress,keyboardType,textInputStyle,fieldId,secureTextEntry}=props
 
  return( 
       <TextInput
@@ -12,6 +12,7 @@ const{ placeholder,value,onChangeTextPress,keyboardType,textInputStyle,fieldId}=
       value={value}
       keyboardType={keyboardType}
       style={textInputStyle}
+      secureTextEntry={secureTextEntry}
       />
      );
 

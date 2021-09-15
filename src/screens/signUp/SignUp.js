@@ -5,10 +5,15 @@ import { useNavigation } from '@react-navigation/native';
 import Size from "../../common/Fonts";
 import CustomTextInput from "../../components/CustomTextInput";
 import CustomButton from "../../components/CustomButton";
+import Constants from "../../common/Constants";
+import { color } from 'react-native-reanimated';
 
 const SignUp = () =>{
 const navigation = useNavigation();
+const[emailValidation,setEmailValidation] =useState(false)
+const[mobileValidation,setMobileValidation] =useState(false)
 const [passwordMatch,setPasswordMatch] =useState(false)
+
 const [state,setState] = useState({
     name:'',
     email:'',
@@ -18,10 +23,30 @@ const [state,setState] = useState({
 })
 
 const _inputChange = (key, value) =>{
+  if(key === 'email')
+  {
+    if((Constants.EMAIL_REGEX).test(value)){
+      setEmailValidation(false)
+    }else{
+      setEmailValidation(true)
+    }
+  }
+  if(key === 'mobile')
+  {
+    if((Constants.MOBILE_REGEX).test(value)){
+      setMobileValidation(false)
+    }else{
+      setMobileValidation(true)
+    }
+  }
+if(key=== 'confirmPassword'){
+  _confirmPassword();
+}
    setState({
        ...state,
        [key]:value,
    })
+  
 }
 
 const _handleSignUp = ()=>{
@@ -29,12 +54,18 @@ const _handleSignUp = ()=>{
 
 }
 
-// if(state.confirmPassword !== state.password)
-// {
-// setPasswordMatch(true)
-// }else{
-//     setPasswordMatch(false)
-// }
+//  
+const _confirmPassword = ()=>{
+
+  if(state.confirmPassword !== state.password)
+  {
+    setPasswordMatch(false)
+  }else{
+    setPasswordMatch(true)
+   }
+}
+
+console.log(state)
 
 return(
     <View style={style.container}>
@@ -49,6 +80,7 @@ return(
            fieldId='name'
         />
       </View>
+    
       <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Mobile No'}
@@ -59,6 +91,8 @@ return(
            keyboardType='numeric'
         />
       </View>
+      {mobileValidation?<Text style={{paddingLeft:10,color:'red'}}>Invalid number</Text>:null}
+      
       <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Email'}
@@ -68,6 +102,7 @@ return(
            fieldId='email'
         />
       </View>
+      {emailValidation?<Text style={{paddingLeft:10,color:'red'}}>Invalid Email</Text>:null}
       <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Password'}
@@ -75,6 +110,7 @@ return(
            value={state.password}
            onChangeTextPress={_inputChange}
            fieldId='password'
+           secureTextEntry={true}
         />
       </View>
       <View style={style.TextInputView}>
@@ -84,6 +120,7 @@ return(
            value={state.confirmPassword}
            onChangeTextPress={_inputChange}
            fieldId='confirmPassword'
+           secureTextEntry={true}
         />
       </View>
       {passwordMatch?<Text style={{paddingLeft:10,color:'red'}}>paasword not match</Text>:null}
@@ -99,7 +136,7 @@ return(
          onPress={() => _handleSignUp()}
         />
        <View style={style.newAcount}>
-        <TouchableOpacity onPress={() =>navigation.navigate('Login') }>
+        <TouchableOpacity onPress={() => navigation.navigate('Login') }>
           <Text >Already have a account? <Text style={style.loginText}>LOGIN</Text> </Text>
         </TouchableOpacity>
       </View>
@@ -115,9 +152,10 @@ const style = StyleSheet.create({
         alignSelf:'flex-start',
         marginTop:50,
         marginBottom:20,
-        marginLeft:10,
+        marginLeft:15,
         fontSize:Size.Size.FONT_SIZE_30,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color:'blue'
     },
     textInputStyle:{
         marginVertical:5,

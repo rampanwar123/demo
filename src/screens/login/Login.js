@@ -5,32 +5,34 @@ import { useNavigation } from '@react-navigation/native';
 import Size from "../../common/Fonts";
 import CustomTextInput from "../../components/CustomTextInput";
 import CustomButton from '../../components/CustomButton';
+import Constants from "../../common/Constants";
 
 const Login = () =>{
-const navigation = useNavigation()
+const navigation = useNavigation();
+
+const[MValidation,setMValidation] =useState(false)
 const [state,setState] = useState({
     email:'',
     password:''
 })
 
-const enterEmail = (text) => {
-    setState(prevState => ({
-      ...prevState,
-      email: text
-    }))
+const _inputChange = (key, value) => {
+  if(key==='email'){
+    if((Constants.EMAIL_REGEX).test(value)){
+      setMValidation(false)
+    }else{
+      setMValidation(true)
+    }
   }
-
-  const enterPassword = (text) => {
-    setState(prevState => ({
-      ...prevState,
-      password: text
-    }))
-  }
-
-  const _handleLogin = ()=>{
-    Alert.alert('Login')
-
+   setState({
+     ...state,
+     [key]:value,
+   })
 }
+
+const _handleLogin = ()=>{
+    Alert.alert('Login')
+  };
 
 return(
     <View style={style.container} >
@@ -41,16 +43,20 @@ return(
            placeholder={'Email'}
            textInputStyle={style.textInputStyle}
            value={state.email}
-           onChangeTextPress={text => enterEmail(text)}
+           onChangeTextPress={_inputChange}
+           fieldId='email'
         />
         </View>
+        {MValidation?<Text style={{paddingLeft:10,color:'red'}}>Invalid Email</Text>:null}
 
         <View style={style.TextInputView}>
           <CustomTextInput
            placeholder={'Password'}
            textInputStyle={style.textInputStyle}
            value={state.password}
-           onChangeTextPress={text => enterPassword(text)}
+           onChangeTextPress={_inputChange}
+           fieldId='password'
+           secureTextEntry={true}
         />
         </View>
 
@@ -91,7 +97,8 @@ const style =StyleSheet.create({
         marginBottom:20,
         marginLeft:10,
         fontSize:Size.Size.FONT_SIZE_30,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color:'blue'
     },
     textInputStyle:{
         marginVertical:10,
