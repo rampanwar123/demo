@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {View,Text,StyleSheet,TouchableOpacity, Image,StatusBar,BackHandler} from 'react-native';
+import {View,Text,StyleSheet,TouchableOpacity,StatusBar,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Size from "../../common/Fonts";
@@ -24,17 +24,17 @@ const [state,setState] = useState({
     confirmPassword:''
 })
 
-// useBackButton(backButtonHandler);
+useBackButton(backButtonHandler);
 
-//  //backButtonHandler.
-//  function backButtonHandler() {
-//      showOptionAlert('Do you want to quit the app?', quitAppCallback);
-//      return true;
-//  }
+ //backButtonHandler.
+ function backButtonHandler() {
+     showOptionAlert('Do you want to quit the app?', quitAppCallback);
+     return true;
+ }
 
-//  const quitAppCallback = () => {
-//      BackHandler.exitApp();
-//  };
+ const quitAppCallback = () => {
+     BackHandler.exitApp();
+ };
 
 const _inputChange = (key, value) =>{
   if(key === 'email')
@@ -122,6 +122,7 @@ return(
         />
       </View>
       {emailValidation && state.email.length > 0?<Text style={style.inValidTextStyle}>please enter valid email</Text>:null}
+
       <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Password'}
@@ -134,6 +135,7 @@ return(
            showHidePassword={showHidePassword}
         />
       </View>
+
       <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Confirm Password'}
@@ -146,7 +148,7 @@ return(
            showHidePassword={showHidePassword}
         />
       </View>
-      {passwordMatch?<Text style={style.inValidTextStyle}>paasword not match</Text>:null}
+      {passwordMatch && state.confirmPassword.length > 0?<Text style={style.inValidTextStyle}>paasword not match</Text>:null}
 
       <CustomButton
          text={'SIGN UP'}
@@ -158,11 +160,13 @@ return(
          top={25}
          onPress={() => _handleSignUp()}
         />
+
        <View style={style.newAcount}>
         <TouchableOpacity onPress={() => navigation.navigate('Login') }>
           <Text >Already have a account? <Text style={style.loginText}>Login</Text> </Text>
         </TouchableOpacity>
       </View>
+      
     </View>
 )
 }

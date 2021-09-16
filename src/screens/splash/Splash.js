@@ -1,36 +1,29 @@
 import React,{useEffect} from 'react';
-import {View,Text,StyleSheet,StatusBar,ActivityIndicator} from 'react-native';
+import {View,Text,StyleSheet,StatusBar,ActivityIndicator,Image,Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import SplashScreen from 'react-native-splash-screen'
 
 import Size from "../../common/Fonts";
+import Images from "../../common/Images";
 
 const Splash = () =>{
     const navigation = useNavigation()
 
     useEffect(() => {
         setTimeout(() => {
+            SplashScreen.hide();
+          
         navigation.navigate('SignUp')
-        }, 2000)
+        }, 200)
       }, []);
 
-return(
-    <View style={style.container}>
-        <StatusBar backgroundColor='white'/>
-        {/* <Text style={style.welcomeText} >Welcome</Text>
-        <Text style={style.welcomeText}  >To</Text> */}
-        <Text style={style.textStyle}>Demo App</Text>
-        <ActivityIndicator size={32} color='blue' style={{marginTop:10}}/>
-        <Text style={{fontSize:20}}>loading...</Text>
-       
-    </View>
-)
+return null
 }
 
 const style =StyleSheet.create({
     container:{
         flex:1,
-        justifyContent:'center',
-        alignItems:'center',
+     
         backgroundColor:'white'
     },
     textStyle:{

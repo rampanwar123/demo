@@ -25,8 +25,8 @@ const _onFocus=()=> {
       keyboardType={keyboardType}
       style={textInputStyle}
       secureTextEntry={secureTextEntry}
-     onBlur={_onBlur}
-     onFocus={_onFocus}
+      onBlur={_onBlur}
+      onFocus={_onFocus}
       
       />
       {showPassword && String(value).length>0? 
