@@ -1,32 +1,48 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import {View,Text,StyleSheet} from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'; 
 
 import CustomTextInput  from "../../components/CustomTextInput";
 
+
 const Home = () => {
+  const [state,setState] = useState([])
+
+    useEffect(()=>{
+      fetch('https://enigmatic-reaches-55405.herokuapp.com/reports')
+      .then(res => res.json())
+      .then(data => {
+        setState(data.reports)
+        console.log(data.reports)
+      })
+      .catch(console.error)
+    },[])
+    
+
+  const  mapMarkers = () => {
+      return state.map((report) => <Marker
+        key={report.id}
+        coordinate={{ latitude: report.lat, longitude: report.lon }}
+        title={report.location}
+        description={report.comments}
+      >
+      </Marker >)
+    }
+
     return(
       <View style={style.container}>
-        <MapView
-        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-        style={style.map}
-        region={{
-          latitude: 22.7196,
-          longitude: 75.8577,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
-        }}
-        >
-        <Marker
-        coordinate={{
-          latitude: 22.7196,
-          longitude: 75.8577,
-        }}
-        title='indore City'
-        description='description is here'
-        />
-          
+
+         <MapView
+        style={{ ...StyleSheet.absoluteFillObject }}
+        initialRegion={{
+          latitude: 37.1,
+          longitude: -95.7,
+          latitudeDelta: 10,
+          longitudeDelta: 45
+        }} >
+          {mapMarkers()}
       </MapView>
+       
   
       </View>
     )
