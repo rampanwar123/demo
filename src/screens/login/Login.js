@@ -12,6 +12,7 @@ const navigation = useNavigation();
 
 const[emailValidation,setEmailValidation] =useState(false)
 const [secureTextEntry,setSecureTextEntry] = useState(true)
+const [emptyfieldText,setEmptyfieldText] = useState(false)
 const [state,setState] = useState({
     email:'',
     password:''
@@ -31,6 +32,9 @@ const [state,setState] = useState({
 //  };
 
 const _inputChange = (key, value) => {
+  if(state.email.length==0){
+    setEmptyfieldText(false)
+  }
   if(key==='email'){
     if((Constants.EMAIL_REGEX).test(value)){
       setEmailValidation(true)
@@ -45,12 +49,20 @@ const _inputChange = (key, value) => {
 }
 
 const _handleLogin = ()=>{
-    navigation.navigate('Home')
+  //Check for the Name TextInput
+  if (!state.email.trim() || !state.password.trim()) {
+   setEmptyfieldText(true)
+  }else{
+    navigation.navigate('List')
+  }
+
+  
   };
 
 const showHidePassword =() =>{
  setSecureTextEntry(!secureTextEntry)
 }
+
 
 return(
     <View style={style.container} >
@@ -65,10 +77,11 @@ return(
            value={state.email}
            onChangeTextPress={_inputChange}
            fieldId='email'
+          
         />
         </View>
         {!emailValidation&&state.email.length>0?<Text style={{marginHorizontal:20,color:'red',fontSize:10,lineHeight:10}}>please enter valid email</Text>:null}
-
+        {emptyfieldText ?<Text style={{marginHorizontal:20,color:'red',fontSize:10,lineHeight:10}}>please enter email id</Text>:null}
         <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Password'}
@@ -81,6 +94,7 @@ return(
            showHidePassword={showHidePassword}
         />
        </View>
+       {emptyfieldText ?<Text style={{marginHorizontal:20,color:'red',fontSize:10,lineHeight:10}}>please enter password</Text>:null}
 
           <TouchableOpacity style={{alignItems:'flex-end'}}>
              <Text style={style.forgotText}>Forgot Password?</Text>

@@ -6,10 +6,11 @@ import Images from "../common/Images";
 
 const CustomTextInput = (props) =>{
 const [focus,setFocus] = useState('gray')
-const{ placeholder,value,onChangeTextPress,keyboardType,textInputStyle,fieldId,secureTextEntry,showPassword,showHidePassword}=props
+const{ placeholder,value,onChangeTextPress,keyboardType,textInputStyle,fieldId,secureTextEntry,showPassword,showHidePassword,borderColor}=props
 
 const _onFocus=()=> {
    setFocus('blue')
+  
    };
  
  const _onBlur=()=> {
@@ -17,7 +18,7 @@ const _onFocus=()=> {
    };
 
  return( 
-     <View style={[style.container,{borderColor:focus}]}>
+     <View style={[style.container,{borderColor:borderColor}]}>
       <TextInput
       placeholder={placeholder}
       onChangeText={(text) => onChangeTextPress(fieldId,text)}
@@ -25,8 +26,8 @@ const _onFocus=()=> {
       keyboardType={keyboardType}
       style={textInputStyle}
       secureTextEntry={secureTextEntry}
-      onBlur={_onBlur}
-      onFocus={_onFocus}
+     //  onBlur={_onBlur}
+     //  onFocus={_onFocus}
       
       />
       {showPassword && String(value).length>0? 

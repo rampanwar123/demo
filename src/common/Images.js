@@ -4,6 +4,8 @@ const Images = {
     ic_back_black: require('../assets/images/ic_back_black.png'),
     show_password: require('../assets/images/show_password.png'),
     splash: require('../assets/images/splash.jpg'),
+    back_arrow: require('../assets/images/back_arrow.png'),
+    delete: require('../assets/images/delete.png')
   };
   export default Images;
 

@@ -24,17 +24,17 @@ const [state,setState] = useState({
     confirmPassword:''
 })
 
-useBackButton(backButtonHandler);
+// useBackButton(backButtonHandler);
 
- //backButtonHandler.
- function backButtonHandler() {
-     showOptionAlert('Do you want to quit the app?', quitAppCallback);
-     return true;
- }
+//  //backButtonHandler.
+//  function backButtonHandler() {
+//      showOptionAlert('Do you want to quit the app?', quitAppCallback);
+//      return true;
+//  }
 
- const quitAppCallback = () => {
-     BackHandler.exitApp();
- };
+//  const quitAppCallback = () => {
+//      BackHandler.exitApp();
+//  };
 
 const _inputChange = (key, value) =>{
   if(key === 'email')
@@ -64,7 +64,7 @@ if(key=== 'confirmPassword'){
 }
 
 const _handleSignUp = ()=>{
-    navigation.navigate('Login')
+    navigation.navigate('List')
 
 }
 
