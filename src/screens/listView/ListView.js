@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {View, Text , StyleSheet,FlatList,Image, Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import { useDispatch,useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import Images from "../../common/Images";
 import CustomButton from "../../components/CustomButton";
 import ListItem from "./ListItem";
-import { selectedItem } from "./selectedItemAction";
+import { selectedItem,itemList } from "./selectedItemAction";
 import { color } from 'react-native-reanimated';
 
 
@@ -76,15 +76,18 @@ const ListView = () => {
   const dispatch =useDispatch();
   const[selectedItemList , setSelectedItemList] = useState(DATA)
  
+ useEffect(()=>{
+   dispatch( itemList(selectedItemList))
+ },[])
 
   const showList = () => {
- const listSelected = selectedItemList.filter(item=> item.selected==true);
-dispatch(selectedItem(listSelected))
-if(listSelected.length>0){
-  navigation.navigate('SelectedItemList')
-}else{
-  alert('select an items')
-}
+       const listSelected = selectedItemList.filter(item=> item.selected==true);
+       dispatch(selectedItem(listSelected))
+       if(listSelected.length>0){
+          navigation.navigate('Selected Item')
+        }else {
+                  alert('select an items')
+              }
 
   }
 
@@ -95,27 +98,19 @@ if(listSelected.length>0){
         return{
           ...item,
           selected:!item.selected
-        }
-      
+        }     
       }
-
         return{
           ...item,
           selected:item.selected
-        }
-      
-     
-      
+        }     
     })
     setSelectedItemList(newData)
    
   }
 
-    const renderItem = ({ item ,index}) =>{
-     
-        return <ListItem item ={item} index={index} onChangeValue={onChangeValue} isCheckBox={true}/>
-      
-          
+    const renderItem = ({ item ,index}) =>{    
+        return <ListItem item ={item} index={index} onChangeValue={onChangeValue} isCheckBox={true}/>         
     }
 
  

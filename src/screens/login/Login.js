@@ -53,7 +53,7 @@ const _handleLogin = ()=>{
   if (!state.email.trim() || !state.password.trim()) {
    setEmptyfieldText(true)
   }else{
-    navigation.navigate('List')
+    navigation.navigate('HomeTab', { screen: 'List' });
   }
 
   

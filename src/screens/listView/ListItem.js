@@ -5,7 +5,7 @@ import CheckBox from '@react-native-community/checkbox';
 import Images from "../../common/Images";
 
 const Item = ( props) =>{
-  const {item,index,onChangeValue,isCheckBox ,deleteIcon}=props
+  const {item,index,onChangeValue,isCheckBox ,deleteIcon,handleDeleteSelectItem}=props
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
   return(
     <View style={{flex:1,backgroundColor:'white',flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:10,marginVertical:2,elevation:5}} >
@@ -22,7 +22,7 @@ const Item = ( props) =>{
     />
     :null}
     { deleteIcon?
-    <TouchableOpacity >
+    <TouchableOpacity  onPress={()=> handleDeleteSelectItem(item.id)}>
     <Image source={Images.delete}/>
     </TouchableOpacity>
      :null

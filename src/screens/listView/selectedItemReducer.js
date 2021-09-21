@@ -1,7 +1,8 @@
 import ActionTypes from "../../action/ActionTypes";
 
 const intialState = {
-    selectedItemList :[]
+    selectedItemList :[],
+    itemList:[]
 }
 
 const selecteItemReducer = (state=intialState, action) => {
@@ -11,6 +12,11 @@ const selecteItemReducer = (state=intialState, action) => {
             return{
                 ...state,
                 selectedItemList:action.payload
+            }
+        case ActionTypes.ITEM_LIST:
+            return{
+                ...state,
+                itemList:action.payload
             }
             default:
                 return state;

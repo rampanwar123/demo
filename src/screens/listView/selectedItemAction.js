@@ -8,3 +8,11 @@ export const selectedItem = (payload) =>{
 
     }
 }
+
+export const itemList = (payload) => {
+    console.log('paload',payload)
+    return{
+        type:ActionTypes.ITEM_LIST,
+        payload
+    }
+}
