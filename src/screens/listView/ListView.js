@@ -3,6 +3,7 @@ import {View, Text , StyleSheet,FlatList,Image, Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import { useDispatch,useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 import Images from "../../common/Images";
 import CustomButton from "../../components/CustomButton";
@@ -62,9 +63,11 @@ const DATA = [
   
  
   const Header = () =>{
+    const navigation = useNavigation()
       return(
-          <View style={{alignItems:'center',width:'100%',backgroundColor:'blue'}}>
-              <Text style={{fontSize:32,marginVertical:5 ,color:'white'}}>Item List</Text>
+          <View style={{flexDirection:'row',backgroundColor:'blue',alignItems:'center',paddingHorizontal:10}}>
+               <Icon name ='menu' size={30} color='white' onPress={()=> navigation.openDrawer()}/>
+              <Text style={{fontSize:32,marginVertical:5 ,color:'white',marginLeft:'10%'}}>Item List</Text>
          </View>
       )
   }
@@ -72,6 +75,7 @@ const DATA = [
 
 
 const ListView = () => {
+
   const navigation = useNavigation()
   const dispatch =useDispatch();
   const[selectedItemList , setSelectedItemList] = useState(DATA)
@@ -92,8 +96,9 @@ const ListView = () => {
   }
 
   const onChangeValue=(itemSelected,index)=>{
+
     const newData= selectedItemList.map(item =>{
- 
+
       if(item.id == itemSelected.id ){
         return{
           ...item,
@@ -123,7 +128,7 @@ const ListView = () => {
               ListHeaderComponent={Header}
             />
 
-<CustomButton
+       <CustomButton
          text={'show selected item'}
          alignSelf={'center'}
          width={'90%'}

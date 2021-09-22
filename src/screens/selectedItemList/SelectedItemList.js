@@ -6,14 +6,17 @@ import {useNavigation  } from "@react-navigation/native";
 import ListItem from "../listView/ListItem";
 import CustomButton from "../../components/CustomButton";
 import {selectedItem  } from "../listView/selectedItemAction";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const Header = () =>{
-    return(
-        <View style={{alignItems:'center',width:'100%',backgroundColor:'blue'}}>
-            <Text style={{fontSize:32,marginVertical:5,color:'white'}}>Selected Items</Text>
-       </View>
-    )
-}
+    const navigation = useNavigation()
+      return(
+          <View style={{flexDirection:'row',backgroundColor:'blue',alignItems:'center',paddingHorizontal:10}}>
+               <Icon name ='menu' size={30} color='white' onPress={()=> navigation.openDrawer()}/>
+              <Text style={{fontSize:32,marginVertical:5 ,color:'white',marginLeft:'10%'}}>Selected Items</Text>
+         </View>
+      )
+  }
 
 const SelectedItemList = () => {
     const dispatch = useDispatch()

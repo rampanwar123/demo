@@ -3,6 +3,7 @@ import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {createDrawerNavigator} from "@react-navigation/drawer"
 import Icon from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -13,11 +14,22 @@ import SignUpScreen from '../screens/signUp/SignUp'
 import HomeScreen from "../screens/home/Home";
 import ListScreen from '../screens/listView/ListView'
 import SelectedItemList from "../screens/selectedItemList/SelectedItemList";
+import CustomDrawer from "../components/CustomDrawer";
 
 import Images from "../common/Images";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+
+const DrawerNavigator = () => {
+ return(
+   <Drawer.Navigator drawerContent = { props => <CustomDrawer {...props}/>} >
+      <Drawer.Screen name='HomeTab' component={HomeTab}/>
+   </Drawer.Navigator>
+ )
+}
+
 
 const HomeTab = () => {
   return(
@@ -54,7 +66,7 @@ const AppNavigation = () =>{
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="HomeTab" component={HomeTab} />
+          <Stack.Screen name="Drawer" component={DrawerNavigator} />
 
         </Stack.Navigator>
       </NavigationContainer>
