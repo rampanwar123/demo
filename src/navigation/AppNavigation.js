@@ -15,6 +15,7 @@ import HomeScreen from "../screens/home/Home";
 import ListScreen from '../screens/listView/ListView'
 import SelectedItemList from "../screens/selectedItemList/SelectedItemList";
 import CustomDrawer from "../components/CustomDrawer";
+import demoScreen from "../screens/demoScreen/demoScreen";
 
 import Images from "../common/Images";
 
@@ -67,6 +68,7 @@ const AppNavigation = () =>{
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Drawer" component={DrawerNavigator} />
+          <Stack.Screen name="demoScreen" component={demoScreen} />
 
         </Stack.Navigator>
       </NavigationContainer>

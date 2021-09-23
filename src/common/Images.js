@@ -7,7 +7,8 @@ const Images = {
     back_arrow: require('../assets/images/back_arrow.png'),
     delete: require('../assets/images/delete.png'),
     blue_list: require('../assets/images/blue_list.png'),
-    gray_list: require('../assets/images/gray_list.png')
+    gray_list: require('../assets/images/gray_list.png'),
+    profile_logo: require('../assets/images/profile_logo.png')
   };
   export default Images;
 

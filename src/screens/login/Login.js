@@ -53,10 +53,9 @@ const _handleLogin = ()=>{
   if (!state.email.trim() || !state.password.trim()) {
    setEmptyfieldText(true)
   }else{
-    navigation.navigate('Drawer', { screen: 'List' });
+    // navigation.navigate('Drawer', { screen: 'List' });
+    navigation.navigate('demoScreen');
   }
-
-  
   };
 
 const showHidePassword =() =>{
