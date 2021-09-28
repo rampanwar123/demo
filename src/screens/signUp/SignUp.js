@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {View,Text,StyleSheet,TouchableOpacity,StatusBar,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import Size from "../../common/Fonts";
+import Fonts from "../../common/Fonts";
 import CustomTextInput from "../../components/CustomTextInput";
 import CustomButton from "../../components/CustomButton";
 import Constants from "../../common/Constants";
@@ -179,7 +179,7 @@ const style = StyleSheet.create({
     signUpText:{
         alignSelf:'center',
         marginTop:100,
-        fontSize:32,
+        fontSize:Fonts.Size.FONT_SIZE_32,
         fontWeight:'bold',
         color:'blue'
     },
@@ -203,7 +203,7 @@ const style = StyleSheet.create({
         color:'blue'
     },
     inValidTextStyle:{
-      fontSize:10,
+      fontSize:Fonts.Size.FONT_SIZE_10,
       lineHeight:10,
       paddingLeft:20,
       color:'red'

@@ -1,6 +1,5 @@
-import React from "react";
 import { StyleSheet } from "react-native";
-import { exp } from "react-native-reanimated";
+import Fonts from "../../common/Fonts";
 
 const Style = StyleSheet.create({
     container:{
@@ -34,7 +33,7 @@ const Style = StyleSheet.create({
 
     },
     tabBarText:{
-        fontSize:18,
+        fontSize:Fonts.Size.FONT_SIZE_18,
         fontWeight:'400',
         color:'gray'
     },

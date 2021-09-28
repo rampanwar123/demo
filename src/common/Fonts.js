@@ -11,7 +11,9 @@ const Type = {
   
   /* Font size */
   const Size = {
+    FONT_SIZE_32: 32,
     FONT_SIZE_30: 30,
+    FONT_SIZE_28: 28,
     FONT_SIZE_24: 24,
     FONT_SIZE_22: 22,
     FONT_SIZE_20: 20,
@@ -19,6 +21,7 @@ const Type = {
     FONT_SIZE_16: 16,
     FONT_SIZE_14: 14,
     FONT_SIZE_12: 12,
+    FONT_SIZE_10: 10,
   };
   
   export default {

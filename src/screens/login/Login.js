@@ -2,7 +2,7 @@ import React ,{useState}from 'react';
 import {View,Text,StyleSheet,TouchableOpacity,Alert,StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import Size from "../../common/Fonts";
+import Fonts from "../../common/Fonts";
 import CustomTextInput from "../../components/CustomTextInput";
 import CustomButton from '../../components/CustomButton';
 import Constants from "../../common/Constants";
@@ -54,7 +54,7 @@ const _handleLogin = ()=>{
    setEmptyfieldText(true)
   }else{
     // navigation.navigate('Drawer', { screen: 'List' });
-    navigation.navigate('demoScreen');
+    navigation.navigate('OTPScreen');
   }
   };
 
@@ -79,8 +79,8 @@ return(
           
         />
         </View>
-        {!emailValidation&&state.email.length>0?<Text style={{marginHorizontal:20,color:'red',fontSize:10,lineHeight:10}}>please enter valid email</Text>:null}
-        {emptyfieldText ?<Text style={{marginHorizontal:20,color:'red',fontSize:10,lineHeight:10}}>please enter email id</Text>:null}
+        {!emailValidation&&state.email.length>0?<Text style={style.inValidTextStyle}>please enter valid email</Text>:null}
+        {emptyfieldText ?<Text style={style.inValidTextStyle}>please enter email id</Text>:null}
         <View style={style.TextInputView}>
         <CustomTextInput
            placeholder={'Password'}
@@ -93,7 +93,7 @@ return(
            showHidePassword={showHidePassword}
         />
        </View>
-       {emptyfieldText ?<Text style={{marginHorizontal:20,color:'red',fontSize:10,lineHeight:10}}>please enter password</Text>:null}
+       {emptyfieldText ?<Text style={style.inValidTextStyle}>please enter password</Text>:null}
 
           <TouchableOpacity style={{alignItems:'flex-end'}}>
              <Text style={style.forgotText}>Forgot Password?</Text>
@@ -156,7 +156,14 @@ const style =StyleSheet.create({
     },
     signUpText:{
         color:'blue'
+    },
+    inValidTextStyle:{
+      marginHorizontal:20,
+      color:'red',
+      fontSize:Fonts.Size.FONT_SIZE_10,
+      lineHeight:10
     }
+
 })
 
 export default Login;

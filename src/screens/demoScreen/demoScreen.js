@@ -4,12 +4,13 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { Rating, AirbnbRating } from 'react-native-ratings';
 
 import Images from "../../common/Images";
+import Fonts from '../../common/Fonts';
 import style from "./Style";
 
 const SerachInput = () => {
     return(
         <View style={{backgroundColor:'white',flexDirection:'row',alignItems:'center' ,borderRadius:5,paddingLeft:10,marginTop:20}}>
-            <Icon name='search1' size={20}/>
+            <Icon name='search1' size={Fonts.Size.FONT_SIZE_20}/>
             <TextInput
             placeholder={'Search'}
             style={{paddingLeft:10}}
@@ -75,7 +76,7 @@ const DATA = [
             <Text style={{color:'orange',padding:3}}>SAR 150</Text>
         </View>
         <View style={style.box2}>
-        <Text style={{fontWeight:'bold',fontSize:16}}>Linear Equation , Algebraic Expression</Text>
+        <Text style={{fontWeight:'bold',fontSize:Fonts.Size.FONT_SIZE_16}}>Linear Equation , Algebraic Expression</Text>
         </View>
         <View style={style.box3}>
             <View style={{flexDirection:'row'}}>
@@ -83,12 +84,12 @@ const DATA = [
                 <Image source={Images.profile_logo} style={{resizeMode:'stretch',width:40,height:40}}/>
                 </View>
                 <View >
-                <Text style={{fontWeight:'600',fontSize:16}}>Marcia Sacha</Text>
+                <Text style={{fontWeight:'600',fontSize:Fonts.Size.FONT_SIZE_16}}>Marcia Sacha</Text>
                 <Rating  imageSize={10} style={{paddingRight:40,paddingTop:3}}/>
                 </View>
             </View>
             <View>
-                <Text style={{fontWeight:'bold',fontSize:16}}>06 May 2020</Text>
+                <Text style={{fontWeight:'bold',fontSize:Fonts.Size.FONT_SIZE_16}}>06 May 2020</Text>
                 <Text>05:00 PM</Text>
             </View>
         </View>
@@ -111,8 +112,8 @@ const handleActiveBar =(id) => {
      <SafeAreaView style={style.container}>
          <StatusBar backgroundColor='orange'/>
       <View style={style.header}>
-        <Icon name='left' size={25}/>
-        <Text style={{fontSize:28,fontWeight:'bold',paddingTop:5}}>Search</Text>
+        <Icon name='left' size={Fonts.Size.FONT_SIZE_24}/>
+        <Text style={{fontSize:Fonts.Size.FONT_SIZE_28,fontWeight:'bold',paddingTop:5}}>Search</Text>
         <SerachInput/>
       </View>
    
@@ -126,15 +127,17 @@ const handleActiveBar =(id) => {
               <Chip title='General Knowledge'/>
           </ScrollView>
       </View>
-      {section===1?  <FlatList
+      {section===1? 
+      <FlatList
          data={DATA}
          renderItem={renderItem}
          keyExtractor={item => item.id}
-       />:section===0? <FlatList
-       data={DATA}
-       renderItem={renderItem}
-       keyExtractor={item => item.id}
-     />:null}
+       />:section===0?
+        <FlatList
+         data={DATA}
+         renderItem={renderItem}
+         keyExtractor={item => item.id}
+       />:null}
         
       </View>
      </SafeAreaView>
