@@ -31,7 +31,6 @@ const Home = () => {
 
     return(
       <View style={style.container}>
-
          <MapView
         style={{ ...StyleSheet.absoluteFillObject }}
         initialRegion={{
@@ -42,8 +41,6 @@ const Home = () => {
         }} >
           {mapMarkers()}
       </MapView>
-       
-  
       </View>
     )
 }

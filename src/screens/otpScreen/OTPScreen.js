@@ -1,18 +1,39 @@
-import React,{ useState ,useRef} from "react";
+import React,{ useState ,useRef,useEffect} from "react";
 import { View,Text,TextInput,StyleSheet,StatusBar, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
 import Fonts from "../../common/Fonts";
 import CustomButton from "../../components/CustomButton";
 
-const OtpScreen = () => {
+const OtpScreen = (props) => {
+  const {initialMinute = 1,initialSeconds = 35} = props;
   const [otpArray,setOtpArray] = useState(['','','',''])
+  const [ minutes, setMinutes ] = useState(initialMinute);
+  const [seconds, setSeconds ] =  useState(initialSeconds);
 
- console.log('main array',otpArray)
   const inputRef1 = useRef(null);
   const inputRef2 = useRef(null);
   const inputRef3 = useRef(null);
   const inputRef4 = useRef(null);
+
+  useEffect(()=>{
+    let myInterval = setInterval(() => {
+            if (seconds > 0) {
+                setSeconds(seconds - 1);
+            }
+            if (seconds === 0) {
+                if (minutes === 0) {
+                    clearInterval(myInterval)
+                } else {
+                    setMinutes(minutes - 1);
+                    setSeconds(59);
+                }
+            } 
+        }, 1000)
+        return ()=> {
+            clearInterval(myInterval);
+          };
+    });
 
   const onOptChange = (index) => {
     return (value) => {
@@ -72,7 +93,12 @@ const OtpScreen = () => {
           <Text style={style.verificationCodeText}>Verification Code</Text>
           <Text style={{alignSelf:'center',}}>Please type the verification code sent to</Text>
           <Text style={{alignSelf:'center', marginBottom:10}}>your email id <Text style={{fontWeight:"bold"}}>{emailId}</Text></Text>
-          <Text style={{alignSelf:'center',fontWeight:'600',fontSize:Fonts.Size.FONT_SIZE_20}}>01:35</Text>
+          { minutes === 0 && seconds === 0
+          ?null
+          :  <Text style={{alignSelf:'center',fontWeight:'600',fontSize:Fonts.Size.FONT_SIZE_20}}>
+                 {minutes}:{seconds < 10 ?  `0${seconds}` : seconds}
+            </Text>
+          }
 
       <View style={style.inputView}>
       {[inputRef1, inputRef2, inputRef3, inputRef4].map(
@@ -120,7 +146,8 @@ const style = StyleSheet.create({
   },
   headerView:{
    height:120,
-    backgroundColor:'orange'
+    backgroundColor:'orange',
+    padding:20
   },
   contentView:{
     flex:4,
