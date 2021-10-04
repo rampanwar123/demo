@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "69120707086",
-    "project_id": "fir-4883e",
-    "storage_bucket": "fir-4883e.appspot.com"
+    "project_number": "218411186119",
+    "project_id": "useful-aquifer-326207",
+    "storage_bucket": "useful-aquifer-326207.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:69120707086:android:43aa95c11d89dc25304a5f",
+        "mobilesdk_app_id": "1:218411186119:android:3e959338e74b58ad360be2",
         "android_client_info": {
           "package_name": "com.first_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "69120707086-dbivhrgc836ktqlk47bh7egj482vfdgv.apps.googleusercontent.com",
+          "client_id": "218411186119-2p6teb5hjmog5mgeotmu869bcjn9a25j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA8WQfQiFHAXrhXtSzz5YNXmDGBV23EwLk"
+          "current_key": "AIzaSyDPzDpoTuodpuVsCDMkoUdwnayJ-KUMlzs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "69120707086-dbivhrgc836ktqlk47bh7egj482vfdgv.apps.googleusercontent.com",
+              "client_id": "218411186119-2p6teb5hjmog5mgeotmu869bcjn9a25j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

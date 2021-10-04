@@ -10,6 +10,8 @@ import Images from "../../common/Images";
 import useBackButton from "../../common/BackButtonHandler";
 import { showOptionAlert } from "../../common/ShowAlert";
 
+import {localNotification} from '../../components/LocalPushController'
+
 const SignUp = () =>{
 const navigation = useNavigation();
 const[emailValidation,setEmailValidation] =useState(false)
@@ -64,7 +66,7 @@ if(key=== 'confirmPassword'){
 }
 
 const _handleSignUp = ()=>{
-    navigation.navigate('List')
+  localNotification()
 
 }
 

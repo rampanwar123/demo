@@ -20,8 +20,10 @@ const SerachInput = () => {
 }
 
 const TopTabBar = (props) =>{
-    const{section,activeTabStyle, handleActiveBar} = props;
+    const{section, handleActiveBar} = props;
     const textColor = {color:'#063970'}
+    const activeTabStyle = {borderBottomWidth:3,borderColor:'#063970'}
+
     return(
         <View style={style.topBar}>
           <TouchableOpacity style={[style.tab,section===0 && activeTabStyle]} onPress={()=>handleActiveBar(0)}>
@@ -102,7 +104,6 @@ const demoScreen = () => {
 const handleActiveBar =(id) => {
     setSection(id)
 }
-    const activeTabStyle = {borderBottomWidth:3,borderColor:'#063970'}
 
     const renderItem = ({ item }) => (
         <Item title={item.title} />
@@ -118,7 +119,7 @@ const handleActiveBar =(id) => {
       </View>
    
       <View style={style.menu}>
-      <TopTabBar section={section} activeTabStyle={activeTabStyle} handleActiveBar={handleActiveBar}/>
+      <TopTabBar section={section}  handleActiveBar={handleActiveBar}/>
       <View style={{height:70}}>
            <ScrollView   horizontal={true}>
               <Chip title='Elementary School'/>
